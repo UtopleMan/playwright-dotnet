@@ -41,7 +41,9 @@ internal class CDPSession : ChannelOwnerBase, ICDPSession, IChannelOwner<CDPSess
     {
         _channel = new(guid, parent.Connection, this);
 
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
         _channel.CDPEvent += OnCDPEvent;
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
     }
 
     ChannelBase IChannelOwner.Channel => _channel;
@@ -55,10 +57,12 @@ internal class CDPSession : ChannelOwnerBase, ICDPSession, IChannelOwner<CDPSess
 
     private void OnCDPEvent(object sender, CDPChannelEventArgs e)
     {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
         if (_cdpSessionEvents.TryGetValue(e.EventName, out CDPSessionEvent cdpNamedEvent))
         {
             cdpNamedEvent.RaiseEvent(e.EventParams);
         }
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
     }
 
     public ICDPSessionEvent Event(string eventName)

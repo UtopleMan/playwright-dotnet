@@ -505,7 +505,7 @@ public class PageClickTests : PageTestEx
         {
             "chromium" => new(27, 18),
             "webkit" => new(26, 17),
-            _ => new Point(28, 18),
+            _ => new System.Drawing.Point(28, 18),
         };
 
         Assert.AreEqual(point.X, Convert.ToInt32(await page.EvaluateAsync<decimal>("pageX")));

@@ -7,7 +7,7 @@
     <Summary>The .NET port of Playwright, used to automate Chromium, Firefox and WebKit with a single API.</Summary>
     <Description>Playwright enables reliable end-to-end testing for modern web apps. It is built to enable cross-browser web automation that is ever-green, capable, reliable and fast. Learn more at https://playwright.dev/dotnet/.</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <DocumentationFile>Microsoft.Playwright.xml</DocumentationFile>
     <RunWithWarnings>true</RunWithWarnings>
@@ -30,7 +30,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.Text.Json" Version="7.0.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
   </ItemGroup>
@@ -54,6 +54,16 @@
     <None Include="..\Common\icon.png" Pack="true" Visible="false" PackagePath="icon.png" />
     <None Remove="Roslynator.Analyzers" />
     <None Remove="Microsoft.VisualStudio.Threading.Analyzers" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.5.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Roslynator.Analyzers" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Target Name="EnsurePrerequisitsRan" BeforeTargets="DedupeDriver">
     <Error Text="Playwright prerequisites are missing. Ensure you've ran `dotnet run --project ./src/tools/Playwright.Tooling/Playwright.Tooling.csproj -- download-drivers --basepath .`" Condition="!Exists('$(MSBuildProjectDirectory)\.drivers')" />
